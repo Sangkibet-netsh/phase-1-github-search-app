@@ -39,3 +39,11 @@ function createUserList(user) {
     document.querySelector('#user-list').appendChild(li);
 }
 
+// Fetch function for all user repo objects for clicked user:
+function fetchRepos(userName) {
+    fetch(`https://api.github.com/users/${userName}/repos`, {
+        Accept: 'application/vnd.github.v3+json'
+    })
+    .then(resp => resp.json())
+    .then(json => json.forEach(repo => createRepoList(repo)))
+}
