@@ -18,4 +18,24 @@ function fetchUsers(user) {
     .then(resp => resp.json())
     .then(json => json.items.forEach(user => createUserList(user)))
 }
+//function createUserList to display users resulting from the name entered to the input form
+
+function createUserList(user) {
+    let li = document.createElement('li');
+    li.className = 'user';
+    //I use innerHTML because I am sure of the operations I want to do
+    // alternatively use innerText and create elements
+    li.innerHTML = `
+        <img src="${user.avatar_url}" class="user-avatar" />
+        <h3>${user.login}</h3>
+        <a href="${user.html_url}">GitHub Profile</a>
+    `
+    // Add event listener to username:
+    li.addEventListener('click', () => {
+        fetchRepos(user.login);
+    });
+
+    // Append new user data to user list:
+    document.querySelector('#user-list').appendChild(li);
+}
 
