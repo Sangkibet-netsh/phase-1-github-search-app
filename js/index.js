@@ -47,3 +47,15 @@ function fetchRepos(userName) {
     .then(resp => resp.json())
     .then(json => json.forEach(repo => createRepoList(repo)))
 }
+
+
+function createRepoList(repo) {
+    let li = document.createElement('li');
+    li.className = 'repo';
+    li.innerHTML = `
+        <p>${repo.name}</p>
+        <a href="${repo.html_url}">Repo Link</a>
+    `
+  // Append new user data to user list:
+    document.querySelector('#repos-list').appendChild(li);
+}
